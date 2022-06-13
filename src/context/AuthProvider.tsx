@@ -26,7 +26,7 @@ export const AuthProvider = ({ children, initialState, reducer }:AuthProviderPro
     };
     const handleLogIn = () => {
         const clientId = 'b08d31c6563e4cfdbb843972346fe647';
-        const redirectUrl = 'https://jimenez-jeronimo-git-main-jerojimenez17.vercel.app/';
+        const redirectUrl = 'http://localhost:3000/';
         const apiUrl = 'https://accounts.spotify.com/authorize';
         const scopes = [
           'user-read-email',
