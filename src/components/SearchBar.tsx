@@ -1,4 +1,4 @@
-import { Button, InputBase, TextField } from "@mui/material";
+import { Box, Button, InputBase, TextField } from "@mui/material";
 
 import "../App.css";
 
@@ -6,7 +6,7 @@ import React from "react";
 import { useAuthProvider } from "../context/AuthProvider";
 import { ResponseSpotify } from "../models/ResponseSpotify";
 import { Albums } from "../models/Artist";
-import { fetchAlbums } from "../services/AlbumService"; 
+import { fetchAlbums } from "../services/AlbumService";
 import { createAdapterArtists } from "../adapter/AdapterArtist";
 
 interface SearchBarProps {
@@ -17,25 +17,30 @@ interface SearchBarProps {
 
 const SearchBar = (props: SearchBarProps) => {
   const { token } = useAuthProvider();
-  
-  const {setAlbums, handleSearch, search } = props;
 
-  const handleSearchClick = () => { 
+  const { setAlbums, handleSearch, search } = props;
+
+  const handleSearchClick = () => {
     if (token.token) {
-      fetchAlbums(search, token.token).then((res: ResponseSpotify) => { 
-        setAlbums(createAdapterArtists(res));
-      });
-    } 
-  }
+      if (search === "") {
+        setAlbums([]);
+      } else {
+        fetchAlbums(search, token.token).then((res: ResponseSpotify) => {
+          setAlbums(createAdapterArtists(res));
+        });
+      }
+    }
+  };
 
   const handleKeyPress = (e: any) => {
     if (e.key === "Enter") {
       handleSearchClick();
     }
-  }
+  };
 
   return (
-    <div
+    <Box
+      className="div-search"
       style={{
         display: "flex",
         flexDirection: "row",
@@ -43,11 +48,8 @@ const SearchBar = (props: SearchBarProps) => {
         alignItems: "center",
         padding: "8px 8px 8px 0px",
         margin: "30px 10px 0px 0px",
-        minWidth:"100%",
-        maxWidth:"100%",
-        
-              width: 664,
-        
+        minWidth: "40vw",
+        maxWidth: "100vw",
         background: "#FFFFFF",
         borderRadius: 24,
       }}
@@ -60,15 +62,14 @@ const SearchBar = (props: SearchBarProps) => {
         color="secondary"
         placeholder="Search"
         style={{
-          maxWidth: "100%",
+          maxWidth: "100vw",
           color: "#000000",
           fontWeight: 700,
-          fontSize: 15 ,
+          fontSize: 15,
           fontFamily: "Montserrat",
           minWidth: "10%",
           borderRadius: 22,
-          paddingLeft: '2rem',
-
+          paddingLeft: "2rem",
         }}
       />
 
@@ -92,7 +93,7 @@ const SearchBar = (props: SearchBarProps) => {
       >
         Buscar
       </Button>
-    </div>
+    </Box>
   );
 };
 

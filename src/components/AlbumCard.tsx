@@ -35,10 +35,10 @@ export const AlbumCard = ({ album, page, handleAlbums }: AlbumCardProps) => {
   const handleRemoveAlbum = (id: string) => {
     if (token.token) {
       removeAlbum(token.token, id).then(() => {
-        if (token.token )
+        if (token.token)
           fetchSavedAlbums(token.token).then((res) => {
-            if(handleAlbums!== undefined)
-            handleAlbums(createAdapterSavedAlbum(res));
+            if (handleAlbums !== undefined)
+              handleAlbums(createAdapterSavedAlbum(res));
           });
       });
     }
@@ -56,8 +56,8 @@ export const AlbumCard = ({ album, page, handleAlbums }: AlbumCardProps) => {
         display: "block",
         marginLeft: "auto",
         marginRight: "auto",
-        width: "90%",
-        height: "90%",
+        maxWidth: "30vw",
+        maxHeight: "60vh",
       }}
     >
       <CardActionArea>
@@ -69,7 +69,14 @@ export const AlbumCard = ({ album, page, handleAlbums }: AlbumCardProps) => {
           width={album.images[1].width}
         />
         <CardContent>
-          <Typography gutterBottom variant="h6" >
+          <Typography
+            gutterBottom
+            variant="body1"
+            display="flex"
+            flexDirection="column"
+            flexWrap="wrap"
+            maxWidth="10vw"
+          >
             {album.name}
           </Typography>
           <Typography variant="body2" color="text.secondary">
@@ -103,28 +110,28 @@ export const AlbumCard = ({ album, page, handleAlbums }: AlbumCardProps) => {
           </Button>
         )}
         {page == "myalbums" && (
-           <Button
-           size="small"
-           variant="contained"
-           color="error"
-           onClick={() => handleRemoveAlbum(album.id)}
-           style={{
-             display: "flex",
-             flexDirection: "row",
-             justifyContent: "center",
-             alignItems: "center",
-             padding: "24px",
-             gap: "42px",
-             width: "154px",
-             height: "44px",
-             borderRadius: "24px",
-             fontSize: "14px",
-             fontWeight: "600",
-             fontFamily: "Monserrat",
-           }}
-         >
-           - Remove Album
-         </Button>
+          <Button
+            size="small"
+            variant="contained"
+            color="error"
+            onClick={() => handleRemoveAlbum(album.id)}
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "center",
+              alignItems: "center",
+              padding: "24px",
+              gap: "42px",
+              width: "154px",
+              height: "44px",
+              borderRadius: "24px",
+              fontSize: "14px",
+              fontWeight: "600",
+              fontFamily: "Monserrat",
+            }}
+          >
+            - Remove Album
+          </Button>
         )}
       </CardActions>
     </Card>

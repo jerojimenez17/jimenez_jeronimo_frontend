@@ -9,11 +9,11 @@ interface NavBarProps {
 }
 
 const NavBar = ({ handlePageChange, page }: NavBarProps) => {
-  const { token ,REMOVE_TOKEN} = useAuthProvider();
+  const { token, REMOVE_TOKEN } = useAuthProvider();
   return (
-    <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static" sx={{ backgroundColor: "#2222" }}>
-        <Toolbar>
+    <Box sx={{ flexGrow: 1, maxHeight: "10vh" }}>
+      <AppBar sx={{ backgroundColor: "#2222" }} position="sticky">
+        <Toolbar variant="regular" className="NavBar-container">
           <Link
             to="/"
             onClick={() => handlePageChange("home")}
@@ -29,62 +29,56 @@ const NavBar = ({ handlePageChange, page }: NavBarProps) => {
               gap: 2,
             }}
           >
-            {token.token && (<>
-              <Link
-                onClick={() => handlePageChange("home")}
-                style={{ textDecoration: "none", color: "#FFFF" }}
-                to="/"
-              >
-                <Typography
-                  variant="h6"
-                  color={page == "home" ? "primary" : "#FFFF"}
+            {token.token && (
+              <>
+                <Link
+                  onClick={() => handlePageChange("home")}
+                  style={{ textDecoration: "none", color: "#FFFF" }}
+                  to="/"
                 >
-                  Search
-                </Typography>{" "}
-              </Link>
-            
+                  <Typography
+                    variant="h6"
+                    color={page == "home" ? "primary" : "#FFFF"}
+                  >
+                    Search
+                  </Typography>{" "}
+                </Link>
 
-            <Typography variant="h6" color="#FFFF">
-              |
-            </Typography>
+                <Typography variant="h6" color="#FFFF">
+                  |
+                </Typography>
 
-            
-              <Link
-                onClick={() => handlePageChange("myalbums")}
-                style={{ textDecoration: "none", color: "#FFFFFF" }}
-                to="/myAlbums"
-              >
-                <Typography
-                  variant="h5"
-                  color={page == "myalbums" ? "primary" : "inherit"}
+                <Link
+                  onClick={() => handlePageChange("myalbums")}
+                  style={{ textDecoration: "none", color: "#FFFFFF" }}
+                  to="/myAlbums"
                 >
-                  My Albums{" "}
+                  <Typography
+                    variant="h6"
+                    color={page == "myalbums" ? "primary" : "inherit"}
+                  >
+                    My Albums{" "}
+                  </Typography>
+                </Link>
+
+                <Typography variant="h6" color="#FFFF">
+                  |
                 </Typography>
-              </Link>
-            
-            <Typography
-            variant="h6"
-            color='#FFFF'
-          >
-            |
-          </Typography>
-            
-              <Link
-                onClick={() =>{ handlePageChange("/")
-                REMOVE_TOKEN();
-            }
-              }
-                style={{ textDecoration: "none", color: "#FFFFFF" }}
-                to="/"
-              >
-                <Typography
-                  variant="h5"
-                  color="inherit"
+
+                <Link
+                  onClick={() => {
+                    handlePageChange("/");
+                    REMOVE_TOKEN();
+                  }}
+                  style={{ textDecoration: "none", color: "#FFFFFF" }}
+                  to="/"
                 >
-                  Logout{" "}
-                </Typography>
-              </Link>
-            </>)}
+                  <Typography variant="h5" color="inherit">
+                    Logout{" "}
+                  </Typography>
+                </Link>
+              </>
+            )}
           </Box>
         </Toolbar>
       </AppBar>

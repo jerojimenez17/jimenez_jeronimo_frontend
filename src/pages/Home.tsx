@@ -43,45 +43,53 @@ const Home = ({ page }: AlbumsProps) => {
   };
 
   const handlePageChange = (e: any, page: number) => {
-    if (token.token) fetchAlbums(search, token.token, (page-1)*4).then((res: ResponseSpotify) => {
-            // console.log(res);
-            setAlbums(createAdapterArtists(res));
-          });
-  }
+    if (token.token)
+      fetchAlbums(search, token.token, (page - 1) * 4).then(
+        (res: ResponseSpotify) => {
+          // console.log(res);
+          setAlbums(createAdapterArtists(res));
+        }
+      );
+  };
 
   return (
-    <Container>
-      <Grid
-        container
-        spacing={1}
-        style={{
-          minHeight: "100vh",
-          backgroundColor: "#22222",
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          marginTop:'1rem',
-        }}
-      >
-        <Grid item xs={12}>
+    <Box
+      sx={{
+        minWidth: "100vw",
+
+        minHeight: "100vh",
+        backgroundColor: "#22222",
+        display: "flex",
+        flexDirection: "column",
+
+        alignItems: "center",
+        marginTop: "1rem",
+      }}
+    >
+      <Box>
+        <Box>
           <AlbumSearchLabel />
-        </Grid>
-        <Grid item xs={12} style={{maxWidth:700}}>
-         
-    
+        </Box>
+        <Box className="search-container">
           <SearchBar
             handleSearch={handleSearch}
             setAlbums={setAlbums}
             search={search}
           />
-
-         
-        </Grid>
-        <Grid item xs={12}>
-          <Typography variant="h5" gutterBottom>
-            {search && `Guarda tus albumes favoritos de ${search}`}
-          </Typography>
-        </Grid>
+        </Box>
+        {Object.keys(albums).length > 0 && (
+          <Box>
+            <Typography
+              variant="h5"
+              flexWrap="wrap"
+              color="#ffff"
+              gutterBottom
+              sx={{ maxWidth: "70vw" }}
+            >
+              {`Guarda tus albumes favoritos de ${search}`}
+            </Typography>
+          </Box>
+        )}
         {/* {
           loading ? 
           <div>Loading...</div> : 
@@ -93,37 +101,43 @@ const Home = ({ page }: AlbumsProps) => {
             </Grid>
           )) : <></>
         } */}
-        <Grid item container spacing={1} direction="row"  >
+        <Box
+          display="flex"
+          flexDirection="row"
+          minHeight="20vh"
+          minWidth="100vw"
+          flexWrap="wrap"
+        >
           {Object.keys(albums).length > 0 ? (
             albums.items.map((album: Album) => (
-              <Grid
-                item
-                xl={3}
-                lg={3}
-                md={6}
-                xs={12}
-                key={album.id}
-                alignSelf="center"
-              >
+              <Box key={album.id} alignSelf="center" maxWidth="30vw">
                 <AlbumCard album={album} page={page} />
-              </Grid>
+              </Box>
             ))
           ) : (
             // <div>Loading...</div>
             <></>
           )}
-        </Grid>
-      </Grid>
+        </Box>
+      </Box>
       {Object.keys(albums).length > 0 ? (
-      <Pagination count={11} style={{}} defaultPage={1} 
-        onChange={(e: any, page: number) => handlePageChange(e,page)}
-        variant="outlined"/> ):<></>}{/* Default ranges */}
+        <Pagination
+          count={11}
+          style={{}}
+          defaultPage={1}
+          onChange={(e: any, page: number) => handlePageChange(e, page)}
+          variant="outlined"
+        />
+      ) : (
+        <></>
+      )}
+      {/* Default ranges */}
       {/* <Pagination
         count={albums.total / albums.limit}
         onChange={() => console.log("hola")}
         variant="outlined"
       /> */}
-    </Container>
+    </Box>
   );
 };
 
