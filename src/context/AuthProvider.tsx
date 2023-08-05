@@ -30,7 +30,7 @@ export const AuthProvider = ({
   };
   const handleLogIn = () => {
     const clientId = "b08d31c6563e4cfdbb843972346fe647";
-    const redirectUrl = "http://localhost:3001/";
+    const redirectUrl = "https://jimenez-jeronimo.vercel.app/";
     const apiUrl = "https://accounts.spotify.com/authorize";
     const scopes = [
       "user-read-email",
