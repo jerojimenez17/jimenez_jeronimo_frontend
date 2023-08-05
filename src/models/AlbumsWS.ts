@@ -25,7 +25,7 @@ interface AlbumItem {
 export interface SavedAlbumWS {
   items: AlbumItem[];
   limit: number;
-  next: string;
-  previous: string;
+  next: string | null;
+  previous: string | null;
   total: number;
 }

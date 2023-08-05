@@ -1,15 +1,24 @@
 import axios from "axios";
 
-export const fetchAlbums = async (artista: string, token: string, offset?: number) => {
+export const fetchAlbums = async (
+  artista: string,
+  token: string,
+  offset?: number
+) => {
   return axios
-  
-    .get(`https://api.spotify.com/v1/search?q=${artista}&type=artist%2Calbum&limit=4${offset ? '&offset='+offset : ''}`, {
-      headers: {
-        Authorization: "Bearer " + token,
-        "Content-Type": "application/json",
-        Accept: "application/json",
-      },
-    })
+
+    .get(
+      `https://api.spotify.com/v1/search?q=${artista}&type=artist%2Calbum&limit=4${
+        offset ? "&offset=" + offset : ""
+      }`,
+      {
+        headers: {
+          Authorization: "Bearer " + token,
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+      }
+    )
     .then((response) => {
       return response.data;
     })
@@ -19,16 +28,20 @@ export const fetchAlbums = async (artista: string, token: string, offset?: numbe
 };
 
 export const fetchSavedAlbums = async (token: string) => {
+  console.log(token);
   return axios
-    .get(`https://api.spotify.com/v1/me/albums`, {
-      headers: {
-        Authorization: "Bearer " + token,
-        "Content-Type": "application/json",
-        Accept: "application/json",
-      },
-    })
+    .get(
+      `https://api.spotify.com/v1/me/albums?offset=0&limit=20&locale=es-ES,es;q=0.9,en;q=0.8`,
+      {
+        headers: {
+          Authorization: "Bearer " + token,
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+      }
+    )
     .then((response) => {
-        console.log(response.data);
+      console.log(response.data);
       return response.data;
     })
     .catch((error) => {

@@ -38,7 +38,7 @@ const NavBar = ({ handlePageChange, page }: NavBarProps) => {
                 >
                   <Typography
                     variant="h6"
-                    color={page == "home" ? "primary" : "#FFFF"}
+                    color={page === "home" ? "primary" : "#FFFF"}
                   >
                     Search
                   </Typography>{" "}
@@ -55,7 +55,7 @@ const NavBar = ({ handlePageChange, page }: NavBarProps) => {
                 >
                   <Typography
                     variant="h6"
-                    color={page == "myalbums" ? "primary" : "inherit"}
+                    color={page === "myalbums" ? "primary" : "inherit"}
                   >
                     My Albums{" "}
                   </Typography>

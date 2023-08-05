@@ -54,15 +54,18 @@ const LogInPage = ({ handleLogIn }: LogInPageProps) => {
         <Typography variant="h6" color="#FFFF">
           Accede a tu cuenta para guardar tus albumes favoritos.
         </Typography>
-        <Button
-          onClick={handleLogIn}
-          variant="text"
-          color="inherit"
-          size="large"
-          endIcon={<ArrowForwardIcon fontSize="large" color="primary" />}
-        >
-          Log In on Spotify
-        </Button>
+        <Box sx={{ marginTop: 2 }}>
+          <Button
+            onClick={handleLogIn}
+            variant="text"
+            color="inherit"
+            size="large"
+            endIcon={<ArrowForwardIcon fontSize="large" color="primary" />}
+          >
+            {" "}
+            <Typography variant="body1">Log In on Spotify</Typography>
+          </Button>
+        </Box>
         {token != null && <h6>{token.token}</h6>}
       </Box>
     </Box>

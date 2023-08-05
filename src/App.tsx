@@ -60,34 +60,36 @@ function App() {
   console.log("llamo ", token);
   return (
     <ThemeProvider theme={theme}>
-      <Box className="App">
-        <BrowserRouter>
-          <NavBar handlePageChange={handlePageChange} page={page} />
-          <Routes>
-            {/*Private route if token !=null*/}
-            <Route
-              path="/"
-              element={
-                token.token ? (
-                  <Home page={page} />
-                ) : (
-                  <LogInPage handleLogIn={handleLogIn} />
-                )
-              }
-            />
-            <Route
-              path="/myAlbums"
-              element={
-                token.token ? (
-                  <MyAlbums page={page} />
-                ) : (
-                  <LogInPage handleLogIn={handleLogIn} />
-                )
-              }
-            />
-          </Routes>
-        </BrowserRouter>
-      </Box>
+      <Paper>
+        <Box className="App">
+          <BrowserRouter>
+            <NavBar handlePageChange={handlePageChange} page={page} />
+            <Routes>
+              {/*Private route if token !=null*/}
+              <Route
+                path="/"
+                element={
+                  token.token ? (
+                    <Home page={page} />
+                  ) : (
+                    <LogInPage handleLogIn={handleLogIn} />
+                  )
+                }
+              />
+              <Route
+                path="/myAlbums"
+                element={
+                  token.token ? (
+                    <MyAlbums page={page} />
+                  ) : (
+                    <LogInPage handleLogIn={handleLogIn} />
+                  )
+                }
+              />
+            </Routes>
+          </BrowserRouter>
+        </Box>
+      </Paper>
     </ThemeProvider>
   );
 }

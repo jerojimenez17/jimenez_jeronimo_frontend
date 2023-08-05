@@ -66,7 +66,12 @@ const Home = ({ page }: AlbumsProps) => {
         marginTop: "1rem",
       }}
     >
-      <Box>
+      <Box
+        display="flex"
+        flexDirection="column"
+        justifyContent="center"
+        alignItems="center"
+      >
         <Box>
           <AlbumSearchLabel />
         </Box>
@@ -78,7 +83,7 @@ const Home = ({ page }: AlbumsProps) => {
           />
         </Box>
         {Object.keys(albums).length > 0 && (
-          <Box>
+          <Box alignContent="center">
             <Typography
               variant="h5"
               flexWrap="wrap"
@@ -103,14 +108,16 @@ const Home = ({ page }: AlbumsProps) => {
         } */}
         <Box
           display="flex"
+          alignContent="center"
           flexDirection="row"
-          minHeight="20vh"
           minWidth="100vw"
           flexWrap="wrap"
+          m={1}
+          p={2}
         >
           {Object.keys(albums).length > 0 ? (
             albums.items.map((album: Album) => (
-              <Box key={album.id} alignSelf="center" maxWidth="30vw">
+              <Box mx={2} key={album.id} display="flex" flexWrap="wrap">
                 <AlbumCard album={album} page={page} />
               </Box>
             ))

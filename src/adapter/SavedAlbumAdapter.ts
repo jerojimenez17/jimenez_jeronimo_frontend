@@ -5,11 +5,11 @@ export const createAdapterSavedAlbum = (
   response: SavedAlbumWS
 ): SavedAlbums => {
   const formatedAlbums = {
-    next: response.next,
-    previous: response.previous,
+    next: response.next ? response.next : null,
+    previous: response.previous ? response.previous : null,
     limit: response.limit,
     total: response.total,
-    items: response.items
+    items: response.items,
     // .map((album) => {
     //   return {
     //     id: album.album.id,

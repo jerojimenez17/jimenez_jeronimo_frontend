@@ -46,36 +46,39 @@ export const AlbumCard = ({ album, page, handleAlbums }: AlbumCardProps) => {
 
   return (
     <Card
-      sx={{ borderRadius: "12px" }}
-      style={{
-        // margin: "15rem",
-        // minWidth: "30%",
-        // maxWidth: "50%",
-        // minHeight: "30vh",
-        // maxHeight: "50vh",
-        display: "block",
-        marginLeft: "auto",
-        marginRight: "auto",
-        maxWidth: "30vw",
-        maxHeight: "60vh",
+      sx={{
+        borderRadius: "12px",
+        display: "flex",
+        flexWrap: "wrap",
+        justifyContent: "space-around",
+        justifyItems: "center",
+        alignContent: "centers",
+        width: "20vw",
+        height: "60vh",
+        minHeight: "fit-content",
       }}
     >
-      <CardActionArea>
+      <CardActionArea
+        sx={{
+          marginY: "2px",
+        }}
+      >
         <CardMedia
+          sx={{ height: "30vh", maxHeight: "max-content" }}
           component="img"
-          height={album.images[1].height}
+          // height={album.images[1].height}
           image={album.images[1].url}
           alt="Album img Not Found"
           width={album.images[1].width}
         />
         <CardContent>
           <Typography
-            gutterBottom
             variant="body1"
             display="flex"
-            flexDirection="column"
-            flexWrap="wrap"
-            maxWidth="10vw"
+            alignItems="center"
+            alignContent="center"
+            justifyContent="center"
+            maxHeight="fit-content"
           >
             {album.name}
           </Typography>
@@ -85,50 +88,17 @@ export const AlbumCard = ({ album, page, handleAlbums }: AlbumCardProps) => {
         </CardContent>
       </CardActionArea>
       <CardActions>
-        {page == "home" && (
-          <Button
-            size="small"
-            onClick={() => handleAddAlbum(album.id)}
-            style={{
-              display: "flex",
-              flexDirection: "row",
-              justifyContent: "center",
-              alignItems: "center",
-              padding: "24px",
-              gap: "42px",
-              width: "154px",
-              height: "44px",
-              color: "#000",
-              background: "#D6F379",
-              borderRadius: "24px",
-              fontSize: "14px",
-              fontWeight: "600",
-              fontFamily: "Monserrat",
-            }}
-          >
+        {page === "home" && (
+          <Button size="small" onClick={() => handleAddAlbum(album.id)}>
             + Add album
           </Button>
         )}
-        {page == "myalbums" && (
+        {page === "myalbums" && (
           <Button
             size="small"
             variant="contained"
             color="error"
             onClick={() => handleRemoveAlbum(album.id)}
-            style={{
-              display: "flex",
-              flexDirection: "row",
-              justifyContent: "center",
-              alignItems: "center",
-              padding: "24px",
-              gap: "42px",
-              width: "154px",
-              height: "44px",
-              borderRadius: "24px",
-              fontSize: "14px",
-              fontWeight: "600",
-              fontFamily: "Monserrat",
-            }}
           >
             - Remove Album
           </Button>

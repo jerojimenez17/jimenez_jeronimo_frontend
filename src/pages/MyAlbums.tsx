@@ -10,13 +10,14 @@ interface MyAlbumsProps {
   page: string;
 }
 
-const MyAlbums = ({page}:MyAlbumsProps) => {
+const MyAlbums = ({ page }: MyAlbumsProps) => {
   const { token } = useAuthProvider();
 
   const [albums, setAlbums] = React.useState({} as SavedAlbums);
 
   useEffect(() => {
     if (token.token) {
+      console.log(token.token);
       fetchSavedAlbums(token.token).then((res) => {
         setAlbums(createAdapterSavedAlbum(res));
       });
@@ -25,29 +26,30 @@ const MyAlbums = ({page}:MyAlbumsProps) => {
 
   return (
     <Box>
-    <Grid  container spacing={1} display='flex' minHeight='100vh'  >
-      
-          {Object.keys(albums).length > 0 ? (
-            albums.items.map((item) => (
-              <Grid
-      item
-      xl={3}
-      lg={3}
-      md={6}
-      xs={12}
-      key={item.album.id}
-      alignSelf="center"
-    >
-            <AlbumCard album={item.album} page={page} handleAlbums={setAlbums}/>
-        </Grid>
-            ))
-          ) : (
-            <></>
-          )}
-      </Grid>
+      <Box
+        display="flex"
+        flexWrap="wrap"
+        justifyContent="space-between"
+        alignItems="center"
+        alignContent="center"
+        alignSelf="center"
+      >
+        {Object.keys(albums).length > 0 ? (
+          albums.items.map((item) => (
+            <Box key={item.album.id} display="flex" height="50vh" m={1}>
+              <AlbumCard
+                album={item.album}
+                page={page}
+                handleAlbums={setAlbums}
+              />
+            </Box>
+          ))
+        ) : (
+          <></>
+        )}
+      </Box>
     </Box>
   );
 };
 
 export default MyAlbums;
-
